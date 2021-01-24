@@ -24,8 +24,9 @@ off set : 0.0ms
 Usually what you want to do is find two subtitle time and indicate where you want them afterwards, here is the help :
 
 ```
-python sub_mover.py --help
 usage: sub_mover.py [-h] [-i INPUT_FILE] [-o OUTPUT_FILE] [-t TIMES]
+
+Let's shift some subtitles!!!
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -34,11 +35,18 @@ optional arguments:
   -o OUTPUT_FILE, --output_file OUTPUT_FILE
                         output file
   -t TIMES, --times TIMES
-                        need 4 timestamps to convert file format:
-                        HH1:MM1:SS1,ms1-HH2:MM2:SS2,ms2;HH3:MM3:SS3,ms3-HH4:MM4:SS4,ms4 where T1 will become T2 and T3
-                        will become T4T1 is the time in the subtitle file, and T2 the time where we want it in the
-                        video(if only 2 are passed we are going to assume that T3=T4=00:00:00,000Math warning: if
-                        T1=T3 I WILL DIVIDE BY 0 !!!
+                        The script requires 2 or 4 timestamps to convert file, the format is:
+                        T1-T2[;T3-T4], with TX=HHX:MMX:SSX,msX (and msX is 3 digits long)
+                        where T1 will become T2 and T3 will become T4
+
+                        so something like this:
+                        HH1:MM1:SS1,ms1-HH2:MM2:SS2,ms2[;HH3:MM3:SS3,ms3-HH4:MM4:SS4,ms4]
+
+                        (if only 2 timestamp are passed we are going to assume that T3=T4=00:00:00,000
+                        it's when the subs where aligned at the beginning but shift more and more during the movie)
+                        Visit https://github.com/Ombre51664/subtitle_mover/blob/main/README.md for an example
+
+                        Math warning: if T1=T3 IT WILL DIVIDE BY 0 !!!
 ```
 
 ## Q&A
